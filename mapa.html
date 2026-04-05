@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine — Mapa de cargadores</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/mapa.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="map-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+      <span class="logo-text">L<span>Line</span></span>
+    </div>
+    <ul class="navbar-nav" id="mainNav">
+      <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+      <li><a href="mapa.html" class="nav-link active"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+      <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+      <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+      <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+      <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+      <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Técnico</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <span class="role-badge user"><i class="fa-solid fa-circle-user"></i> Usuario</span>
+      <div class="avatar" onclick="window.location='perfil.html'">DG</div>
+      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- MAP LAYOUT -->
+  <div class="map-layout">
+
+    <!-- SIDEBAR PANEL -->
+    <div class="map-panel" id="mapPanel">
+
+      <!-- Search & Location -->
+      <div class="panel-search">
+        <div class="input-group">
+          <i class="fa-solid fa-magnifying-glass input-icon"></i>
+          <input type="text" class="input" id="searchInput" placeholder="Buscar por lugar, dirección...">
+          <button class="btn btn-icon-sm btn-ghost input-action" id="clearSearch" style="display:none" title="Limpiar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <button class="btn btn-outline locate-btn" id="locateBtn" title="Usar mi ubicación">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span>Mi ubicación</span>
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="panel-filters">
+        <div class="filters-header" id="filtersToggle">
+          <span><i class="fa-solid fa-sliders"></i> Filtros</span>
+          <div class="filters-header-right">
+            <span class="filter-count" id="filterCount" style="display:none">0</span>
+            <i class="fa-solid fa-chevron-down filters-chevron" id="filtersChevron"></i>
+          </div>
+        </div>
+
+        <div class="filters-body" id="filtersBody">
+          <!-- Estado -->
+          <div class="filter-group">
+            <p class="filter-label">Estado</p>
+            <div class="chip-group">
+              <button class="chip active" data-filter="estado" data-val="all">Todos</button>
+              <button class="chip" data-filter="estado" data-val="libre">
+                <span class="dot-free"></span> Libre
+              </button>
+              <button class="chip" data-filter="estado" data-val="ocupado">
+                <span class="dot-busy"></span> Ocupado
+              </button>
+              <button class="chip" data-filter="estado" data-val="reparacion">
+                <span class="dot-repair"></span> En reparación
+              </button>
+            </div>
+          </div>
+
+          <!-- Tipo -->
+          <div class="filter-group">
+            <p class="filter-label">Tipo de cargador</p>
+            <div class="chip-group">
+              <button class="chip active" data-filter="tipo" data-val="all">Todos</button>
+              <button class="chip" data-filter="tipo" data-val="rapido">
+                <i class="fa-solid fa-bolt"></i> Rápido
+              </button>
+              <button class="chip" data-filter="tipo" data-val="estandar">
+                <i class="fa-solid fa-plug"></i> Estándar
+              </button>
+              <button class="chip" data-filter="tipo" data-val="lento">
+                <i class="fa-solid fa-battery-half"></i> Lento
+              </button>
+            </div>
+          </div>
+
+          <!-- Distancia -->
+          <div class="filter-group">
+            <p class="filter-label">Distancia maxima <span id="distLabel">Sin limite</span></p>
+            <input type="range" class="range-input" id="distFilter" min="5" max="2000" value="2000" step="5">
+          </div>
+
+          <!-- Potencia -->
+          <div class="filter-group">
+            <p class="filter-label">Potencia mínima <span id="powerLabel">0 kW</span></p>
+            <input type="range" class="range-input" id="powerFilter" min="0" max="350" value="0" step="10">
+          </div>
+
+          <!-- Precio -->
+          <div class="filter-group">
+            <p class="filter-label">Precio máximo <span id="priceLabel">Sin límite</span></p>
+            <input type="range" class="range-input" id="priceFilter" min="0" max="1" value="1" step="0.05">
+          </div>
+
+          <!-- Solo disponibles -->
+          <div class="filter-group">
+            <label class="toggle-wrapper">
+              <div class="toggle">
+                <input type="checkbox" id="onlyAvailable">
+                <div class="toggle-track"></div>
+                <div class="toggle-thumb"></div>
+              </div>
+              <span class="filter-label" style="margin:0">Solo disponibles ahora</span>
+            </label>
+          </div>
+
+          <div class="filters-actions">
+            <button class="btn btn-ghost btn-sm" id="resetFilters">
+              <i class="fa-solid fa-rotate-left"></i> Resetear
+            </button>
+            <button class="btn btn-primary btn-sm" id="applyFilters">
+              <i class="fa-solid fa-check"></i> Aplicar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="panel-results">
+        <div class="results-header">
+          <span class="results-count" id="resultsCount">Cargando...</span>
+          <div class="results-sort">
+            <div class="select-wrapper">
+              <select class="select" id="sortSelect" style="padding: 0.375rem 2rem 0.375rem 0.75rem; font-size: var(--text-xs); border-radius: var(--radius-md);">
+                <option value="distancia">Por distancia</option>
+                <option value="potencia">Por potencia</option>
+                <option value="precio">Por precio</option>
+                <option value="nombre">Nombre A-Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="charger-list" id="chargerList">
+          <!-- Skeletons -->
+          <div class="charger-skeleton">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--radius-lg);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+              <div class="skeleton" style="height:14px;width:70%;border-radius:4px"></div>
+              <div class="skeleton" style="height:12px;width:50%;border-radius:4px"></div>
+              <div class="skeleton" style="height:24px;width:80px;border-radius:99px"></div>
+            </div>
+          </div>
+          <div class="charger-skeleton">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--radius-lg);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+              <div class="skeleton" style="height:14px;width:60%;border-radius:4px"></div>
+              <div class="skeleton" style="height:12px;width:45%;border-radius:4px"></div>
+              <div class="skeleton" style="height:24px;width:90px;border-radius:99px"></div>
+            </div>
+          </div>
+          <div class="charger-skeleton">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--radius-lg);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+              <div class="skeleton" style="height:14px;width:75%;border-radius:4px"></div>
+              <div class="skeleton" style="height:12px;width:55%;border-radius:4px"></div>
+              <div class="skeleton" style="height:24px;width:85px;border-radius:99px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-container">
+      <div id="map"></div>
+
+      <!-- Mobile panel toggle -->
+      <button class="map-panel-toggle" id="panelToggle">
+        <i class="fa-solid fa-list"></i>
+        <span id="panelToggleCount">8</span>
+      </button>
+
+      <!-- Map zoom controls info -->
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot free"></span> Libre</div>
+        <div class="legend-item"><span class="legend-dot busy"></span> Ocupado</div>
+        <div class="legend-item"><span class="legend-dot repair"></span> Reparación</div>
+        <div class="legend-item"><span class="legend-dot reserved"></span> Reservado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARGER DETAIL MODAL -->
+  <div class="modal-overlay" id="chargerModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modalName">Cargador</div>
+          <div style="margin-top:4px" id="modalAddress"></div>
+        </div>
+        <button class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <!-- Status Bar -->
+        <div class="detail-status-bar" id="detailStatusBar"></div>
+
+        <!-- Detail Grid -->
+        <div class="detail-grid">
+          <div class="detail-item">
+            <i class="fa-solid fa-bolt detail-item-icon blue"></i>
+            <div>
+              <div class="detail-item-label">Tipo de cargador</div>
+              <div class="detail-item-value" id="modalTipo">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-gauge-high detail-item-icon blue"></i>
+            <div>
+              <div class="detail-item-label">Potencia</div>
+              <div class="detail-item-value" id="modalPotencia">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-clock detail-item-icon green"></i>
+            <div>
+              <div class="detail-item-label">Tiempo estimado</div>
+              <div class="detail-item-value" id="modalTiempo">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-euro-sign detail-item-icon green"></i>
+            <div>
+              <div class="detail-item-label">Precio</div>
+              <div class="detail-item-value" id="modalPrecio">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-calendar detail-item-icon blue"></i>
+            <div>
+              <div class="detail-item-label">Horario</div>
+              <div class="detail-item-value" id="modalHorario">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-plug detail-item-icon blue"></i>
+            <div>
+              <div class="detail-item-label">Conectores</div>
+              <div class="detail-item-value" id="modalConectores">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-location-dot detail-item-icon green"></i>
+            <div>
+              <div class="detail-item-label">Distancia</div>
+              <div class="detail-item-value" id="modalDistancia">—</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fa-solid fa-charging-station detail-item-icon green"></i>
+            <div>
+              <div class="detail-item-label">Plazas disponibles</div>
+              <div class="detail-item-value" id="modalPlazas">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Power bar -->
+        <div class="detail-power">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-semibold">Nivel de potencia disponible</span>
+            <span class="text-sm text-muted" id="modalPowerPct">—</span>
+          </div>
+          <div class="power-bar">
+            <div class="power-fill" id="modalPowerBar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Reviews summary -->
+        <div class="detail-rating">
+          <div class="rating-stars" id="ratingStars"></div>
+          <span class="rating-score" id="ratingScore">4.2</span>
+          <span class="rating-count" id="ratingCount">(28 valoraciones)</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="navBtn">
+          <i class="fa-solid fa-route"></i> Cómo llegar
+        </button>
+        <button class="btn btn-outline" id="detailBtn">
+          <i class="fa-solid fa-circle-info"></i> Más detalles
+        </button>
+        <button class="btn btn-primary" id="reserveBtn">
+          <i class="fa-solid fa-bolt"></i> Reservar plaza
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVATION QUICK MODAL -->
+  <div class="modal-overlay" id="reserveModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fa-solid fa-bolt"></i> Reservar plaza</div>
+        <button class="modal-close" id="closeReserveModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="reserve-charger-summary" id="reserveSummary"></div>
+        <div class="grid" style="gap:var(--space-4);margin-top:var(--space-5)">
+          <div class="form-group">
+            <label class="form-label">Fecha <span>*</span></label>
+            <input type="date" class="input" id="reserveDate">
+          </div>
+          <div class="grid grid-2" style="gap:var(--space-4)">
+            <div class="form-group">
+              <label class="form-label">Hora de inicio <span>*</span></label>
+              <input type="time" class="input" id="reserveTime">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Duración</label>
+              <div class="select-wrapper">
+                <select class="select" id="reserveDuration">
+                  <option value="30">30 minutos</option>
+                  <option value="60" selected>1 hora</option>
+                  <option value="90">1.5 horas</option>
+                  <option value="120">2 horas</option>
+                  <option value="180">3 horas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Vehículo</label>
+            <div class="select-wrapper">
+              <select class="select">
+                <option>Tesla Model 3 (75 kWh)</option>
+                <option>Volkswagen ID.4 (77 kWh)</option>
+                <option>Otro vehículo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price estimate -->
+        <div class="reserve-estimate" id="reserveEstimate">
+          <div class="estimate-row">
+            <span>Tiempo de reserva</span>
+            <span id="estTime">—</span>
+          </div>
+          <div class="estimate-row">
+            <span>Precio estimado</span>
+            <span id="estPrice" class="estimate-value">—</span>
+          </div>
+          <div class="estimate-row estimate-note">
+            <i class="fa-solid fa-clock"></i>
+            <span>La reserva expira en <strong>15 minutos</strong> si no conectas el vehículo</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelReserve">Cancelar</button>
+        <button class="btn btn-primary" id="confirmReserve">
+          <i class="fa-solid fa-check"></i> Confirmar reserva
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST AREA -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/mapa.js"></script>
+</body>
+</html>

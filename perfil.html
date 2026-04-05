@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine - Perfil de usuario</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span class="logo-text">L<span>Line</span></span>
+  </div>
+  <ul class="navbar-nav" id="mainNav">
+    <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+    <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+    <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+    <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+    <li><a href="perfil.html" class="nav-link active"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+    <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Tecnico</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <span class="role-badge user"><i class="fa-solid fa-circle-user"></i> Usuario</span>
+    <div class="avatar">DG</div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-section">
+  <div class="container">
+    <section class="two-col-layout">
+      <article class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-id-card"></i> Perfil</h2>
+        </div>
+        <div class="card-body" id="profileInfo"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-gear"></i> Preferencias</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="form-label" for="roleSelect">Rol del sistema (modo demo)</label>
+            <div class="select-wrapper">
+              <select class="select" id="roleSelect">
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+                <option value="tecnico">Tecnico</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="toggle-wrapper mb-4">
+            <div class="toggle">
+              <input type="checkbox" id="notifyReservation">
+              <div class="toggle-track"></div>
+              <div class="toggle-thumb"></div>
+            </div>
+            <span>Notificar cambios de reserva</span>
+          </label>
+
+          <label class="toggle-wrapper mb-4">
+            <div class="toggle">
+              <input type="checkbox" id="notifyNearby">
+              <div class="toggle-track"></div>
+              <div class="toggle-thumb"></div>
+            </div>
+            <span>Avisar cuando haya cargadores libres cerca</span>
+          </label>
+
+          <button class="btn btn-primary mt-6" id="savePrefs"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid grid-2 mt-6">
+      <article class="card">
+        <div class="card-header"><h2 class="card-title"><i class="fa-solid fa-car"></i> Vehiculos guardados</h2></div>
+        <div class="card-body">
+          <form id="addVehicleForm" class="grid" style="gap:var(--space-3);margin-bottom:var(--space-5)">
+            <div class="grid grid-2" style="gap:var(--space-3)">
+              <input class="input" id="vehicleModel" placeholder="Modelo (ej. Tesla Model 3)" required>
+              <input class="input" id="vehicleBattery" placeholder="Bateria (ej. 75 kWh)" required>
+            </div>
+            <div class="grid grid-2" style="gap:var(--space-3)">
+              <input class="input" id="vehiclePlate" placeholder="Matricula (ej. 1234-LLN)" required>
+              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus"></i> Anadir vehiculo</button>
+            </div>
+          </form>
+          <div class="vehicle-list" id="vehicleList"></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header"><h2 class="card-title"><i class="fa-solid fa-chart-line"></i> Historial breve</h2></div>
+        <div class="card-body" id="profileHistory"></div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/perfil.js"></script>
+</body>
+</html>
+

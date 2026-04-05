@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine - Historial de reservas</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span class="logo-text">L<span>Line</span></span>
+  </div>
+  <ul class="navbar-nav" id="mainNav">
+    <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+    <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+    <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+    <li><a href="historial.html" class="nav-link active"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+    <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+    <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Tecnico</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <span class="role-badge user"><i class="fa-solid fa-circle-user"></i> Usuario</span>
+    <div class="avatar" onclick="window.location='perfil.html'">DG</div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-section">
+  <div class="container">
+    <section class="section-header mb-6">
+      <div>
+        <h1 class="section-title">Historial de reservas</h1>
+        <p class="section-subtitle">Consulta tus reservas activas, completadas y canceladas en una sola vista.</p>
+      </div>
+      <a class="btn btn-primary" href="reservas.html"><i class="fa-solid fa-plus"></i> Nueva reserva</a>
+    </section>
+
+    <div class="tabs" id="historyTabs">
+      <button class="tab active" data-tab="all">Todas <span class="tab-badge" id="countAll">0</span></button>
+      <button class="tab" data-tab="activa">Activas <span class="tab-badge" id="countActiva">0</span></button>
+      <button class="tab" data-tab="completada">Completadas <span class="tab-badge" id="countCompletada">0</span></button>
+      <button class="tab" data-tab="cancelada">Canceladas <span class="tab-badge" id="countCancelada">0</span></button>
+    </div>
+
+    <section id="historyContainer" class="reservation-list"></section>
+  </div>
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/historial.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine — Carga inteligente para tu eléctrico</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="logo-icon">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <span class="logo-text">L<span>Line</span></span>
+    </div>
+
+    <ul class="navbar-nav" id="mainNav">
+      <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Inicio</a></li>
+      <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+      <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+      <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+      <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+      <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+      <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Técnico</a></li>
+    </ul>
+
+    <div class="navbar-actions">
+      <span class="role-badge user"><i class="fa-solid fa-circle-user"></i> Usuario</span>
+      <div class="avatar" title="Mi perfil" onclick="window.location='perfil.html'">DG</div>
+      <button class="navbar-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content anim-fade-up">
+          <div class="hero-eyebrow">
+            <span class="badge badge-green badge-no-dot"><i class="fa-solid fa-bolt"></i>&nbsp; Movilidad eléctrica inteligente</span>
+          </div>
+          <h1 class="hero-title">
+            Encuentra tu punto<br>de carga <span class="gradient-text">ideal</span>
+          </h1>
+          <p class="hero-subtitle">
+            LLine localiza cargadores cercanos, te muestra disponibilidad en tiempo real
+            y te permite reservar tu plaza en segundos. Sin esperas, sin sorpresas.
+          </p>
+          <div class="hero-actions">
+            <a href="mapa.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-map-location-dot"></i> Buscar cargadores
+            </a>
+            <a href="#como-funciona" class="btn btn-outline-white btn-lg">
+              <i class="fa-solid fa-play"></i> Cómo funciona
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-value">+2.400</span>
+              <span class="hero-stat-label">Puntos de carga</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-value">98%</span>
+              <span class="hero-stat-label">Disponibilidad</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-value">&lt;30s</span>
+              <span class="hero-stat-label">Para reservar</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual anim-fade-up delay-3">
+          <div class="hero-card-float">
+            <div class="hc-map-preview">
+              <div class="hc-map-bg">
+                <div class="map-grid-lines"></div>
+                <!-- Fake map markers -->
+                <div class="map-marker free" style="top:28%;left:35%">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="map-marker busy" style="top:55%;left:60%">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="map-marker free" style="top:68%;left:25%">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="map-marker reserved" style="top:38%;left:70%">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="map-marker free pulse" style="top:50%;left:47%">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <!-- User location -->
+                <div class="user-dot" style="top:50%;left:47%"></div>
+              </div>
+            </div>
+            <!-- Floating info card -->
+            <div class="float-card fc-1">
+              <div class="fc-icon green"><i class="fa-solid fa-bolt"></i></div>
+              <div>
+                <div class="fc-title">Centro Comercial</div>
+                <div class="fc-sub"><span class="badge badge-free">Libre</span> · 150 kW · 0.28 €/kWh</div>
+              </div>
+            </div>
+            <div class="float-card fc-2">
+              <div class="fc-icon blue"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <div class="fc-title">Reserva confirmada</div>
+                <div class="fc-sub">Parking Norte · 14:30 hoy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="ventajas">
+    <div class="container">
+      <div class="text-center mb-8 anim-fade-up">
+        <p class="section-eyebrow">¿Por qué LLine?</p>
+        <h2 class="section-heading">Todo lo que necesitas,<br>en una sola app</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card anim-fade-up delay-1">
+          <div class="feature-icon blue">
+            <i class="fa-solid fa-location-crosshairs"></i>
+          </div>
+          <h3 class="feature-title">Localiza cargadores cercanos</h3>
+          <p class="feature-desc">Visualiza en el mapa todos los puntos de carga disponibles a tu alrededor con información en tiempo real.</p>
+          <a href="mapa.html" class="feature-link">Ver en el mapa <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="feature-card anim-fade-up delay-2">
+          <div class="feature-icon green">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3 class="feature-title">Reserva en segundos</h3>
+          <p class="feature-desc">Elige tu cargador, selecciona hora y listo. Tu plaza queda bloqueada para que llegues sin sorpresas.</p>
+          <a href="reservas.html" class="feature-link">Reservar ahora <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="feature-card anim-fade-up delay-3">
+          <div class="feature-icon blue">
+            <i class="fa-solid fa-gauge-high"></i>
+          </div>
+          <h3 class="feature-title">Estado en tiempo real</h3>
+          <p class="feature-desc">Sabe al instante si un cargador está libre, ocupado o en mantenimiento antes de ponerte en marcha.</p>
+          <a href="mapa.html" class="feature-link">Ver disponibilidad <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="feature-card anim-fade-up delay-4">
+          <div class="feature-icon green">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="feature-title">Navega directamente</h3>
+          <p class="feature-desc">Abre la ruta en tu navegador favorito con un solo toque y llega exactamente al punto de carga reservado.</p>
+          <a href="mapa.html" class="feature-link">Cómo llegar <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="como-funciona">
+    <div class="container">
+      <div class="text-center mb-8 anim-fade-up">
+        <p class="section-eyebrow">Proceso sencillo</p>
+        <h2 class="section-heading">Tu próxima carga,<br>más fácil que nunca</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step anim-fade-up delay-1">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+          <h3 class="step-title">Busca</h3>
+          <p class="step-desc">Introduce tu ubicación o activa el GPS y encuentra cargadores cercanos al instante.</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step anim-fade-up delay-2">
+          <div class="step-number">02</div>
+          <div class="step-icon"><i class="fa-solid fa-sliders"></i></div>
+          <h3 class="step-title">Filtra</h3>
+          <p class="step-desc">Aplica filtros por tipo, velocidad, precio o disponibilidad para encontrar el cargador perfecto.</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step anim-fade-up delay-3">
+          <div class="step-number">03</div>
+          <div class="step-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3 class="step-title">Reserva</h3>
+          <p class="step-desc">Selecciona fecha, hora y duración. Tu plaza queda confirmada en menos de 30 segundos.</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step anim-fade-up delay-4">
+          <div class="step-number">04</div>
+          <div class="step-icon"><i class="fa-solid fa-plug-circle-check"></i></div>
+          <h3 class="step-title">Carga</h3>
+          <p class="step-desc">Llega al punto, conecta tu vehículo y disfruta de una carga eficiente y sin complicaciones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATUS SECTION -->
+  <section class="status-section">
+    <div class="container">
+      <div class="status-card anim-fade-up">
+        <div class="status-card-content">
+          <p class="section-eyebrow light">Estado de la red</p>
+          <h2 class="section-heading white">Actualizado en tiempo real</h2>
+          <p class="status-desc">Nuestra plataforma monitoriza cada cargador de la red continuamente para ofrecerte datos precisos cuando los necesitas.</p>
+          <div class="status-pills">
+            <div class="status-pill">
+              <div class="status-dot free"></div>
+              <span>Libre</span>
+            </div>
+            <div class="status-pill">
+              <div class="status-dot busy"></div>
+              <span>Ocupado</span>
+            </div>
+            <div class="status-pill">
+              <div class="status-dot repair"></div>
+              <span>En reparación</span>
+            </div>
+            <div class="status-pill">
+              <div class="status-dot reserved-dot"></div>
+              <span>Reservado</span>
+            </div>
+          </div>
+          <a href="mapa.html" class="btn btn-secondary btn-lg mt-8">
+            <i class="fa-solid fa-map-location-dot"></i> Ver mapa en vivo
+          </a>
+        </div>
+        <div class="status-card-visual">
+          <div class="live-stats">
+            <div class="live-stat">
+              <div class="live-num">1,847</div>
+              <div class="live-label">Cargadores libres</div>
+              <div class="power-bar mt-2"><div class="power-fill" style="width:77%"></div></div>
+            </div>
+            <div class="live-stat">
+              <div class="live-num live-busy">423</div>
+              <div class="live-label">Ocupados ahora</div>
+              <div class="power-bar mt-2"><div class="power-fill" style="width:18%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div>
+            </div>
+            <div class="live-stat">
+              <div class="live-num live-repair">130</div>
+              <div class="live-label">En mantenimiento</div>
+              <div class="power-bar mt-2"><div class="power-fill" style="width:5%;background:linear-gradient(90deg,#EF4444,#F87171)"></div></div>
+            </div>
+            <div class="live-pulse">
+              <div class="pulse-dot"></div>
+              <span>Actualizando cada 30 segundos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARGER TYPES -->
+  <section class="types-section">
+    <div class="container">
+      <div class="text-center mb-8 anim-fade-up">
+        <p class="section-eyebrow">Compatible con todos</p>
+        <h2 class="section-heading">Tipos de cargador disponibles</h2>
+      </div>
+      <div class="types-grid">
+        <div class="type-card anim-fade-up delay-1">
+          <div class="type-icon"><i class="fa-solid fa-bolt"></i></div>
+          <span class="type-badge">Rápido</span>
+          <h3>Carga rápida DC</h3>
+          <p>50–350 kW · 20–40 min</p>
+          <div class="type-connectors">CCS · CHAdeMO · Tesla</div>
+        </div>
+        <div class="type-card anim-fade-up delay-2">
+          <div class="type-icon standard"><i class="fa-solid fa-plug"></i></div>
+          <span class="type-badge standard">Estándar</span>
+          <h3>Carga semi-rápida AC</h3>
+          <p>7.4–22 kW · 2–4 h</p>
+          <div class="type-connectors">Tipo 2 · Mennekes</div>
+        </div>
+        <div class="type-card anim-fade-up delay-3">
+          <div class="type-icon slow"><i class="fa-solid fa-battery-half"></i></div>
+          <span class="type-badge slow">Lento</span>
+          <h3>Carga doméstica</h3>
+          <p>3.7 kW · 6–8 h</p>
+          <div class="type-connectors">Schuko · Tipo 2</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card anim-fade-up">
+        <div class="cta-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h2 class="cta-title">¿Listo para empezar?</h2>
+        <p class="cta-desc">Únete a miles de conductores que ya cargan de forma inteligente con LLine. Gratis, sin instalaciones, desde cualquier dispositivo.</p>
+        <div class="cta-actions">
+          <a href="mapa.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-map-location-dot"></i> Explorar el mapa
+          </a>
+          <a href="perfil.html" class="btn btn-outline btn-lg">
+            <i class="fa-solid fa-user-plus"></i> Crear cuenta
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="navbar-brand">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="logo-text">L<span>Line</span></span>
+          </div>
+          <p class="footer-tagline">Movilidad eléctrica inteligente. Carga donde quieras, cuando quieras.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Producto</h4>
+          <ul>
+            <li><a href="mapa.html">Mapa de cargadores</a></li>
+            <li><a href="reservas.html">Reservas</a></li>
+            <li><a href="historial.html">Historial</a></li>
+            <li><a href="perfil.html">Mi perfil</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Gestión</h4>
+          <ul>
+            <li><a href="admin.html">Panel Admin</a></li>
+            <li><a href="tecnico.html">Panel Técnico</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#">Acerca de LLine</a></li>
+            <li><a href="#">Términos de uso</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LLine. Proyecto universitario de Informática.</p>
+        <p class="footer-credit">Hecho con <i class="fa-solid fa-heart text-danger"></i> y <i class="fa-solid fa-bolt text-primary"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

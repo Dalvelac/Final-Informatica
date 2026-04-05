@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine - Panel administrador</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span class="logo-text">L<span>Line</span></span>
+  </div>
+  <ul class="navbar-nav" id="mainNav">
+    <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+    <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+    <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+    <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+    <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    <li><a href="admin.html" class="nav-link active"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+    <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Tecnico</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <span class="role-badge admin"><i class="fa-solid fa-circle-user"></i> Administrador</span>
+    <div class="avatar" onclick="window.location='perfil.html'">DG</div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="page-wrapper">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-label">Gestion</div>
+      <a class="sidebar-link active" data-section="resumen"><i class="fa-solid fa-table-columns"></i> Resumen</a>
+      <a class="sidebar-link" data-section="cargadores"><i class="fa-solid fa-charging-station"></i> Cargadores</a>
+      <a class="sidebar-link" data-section="reservas"><i class="fa-solid fa-calendar-check"></i> Reservas</a>
+      <a class="sidebar-link" data-section="estadisticas"><i class="fa-solid fa-chart-simple"></i> Estadisticas</a>
+      <div class="sidebar-label">Sistema</div>
+      <a class="sidebar-link" data-section="logs"><i class="fa-solid fa-clock-rotate-left"></i> Logs de actividad</a>
+      <a class="sidebar-link" data-section="configuracion"><i class="fa-solid fa-gear"></i> Configuracion</a>
+    </aside>
+
+    <section class="dashboard-main">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Panel administrador</h1>
+          <p class="section-subtitle">Control de red, disponibilidad y operaciones de LLine.</p>
+        </div>
+        <button class="btn btn-primary" id="addChargerBtn"><i class="fa-solid fa-plus"></i> Anadir cargador</button>
+      </div>
+
+      <div id="section-resumen" class="admin-section">
+        <div class="dashboard-grid" id="kpiGrid"></div>
+        <div class="grid grid-2 mb-6">
+          <article class="card">
+            <div class="card-header"><h2 class="card-title">Estado general de la red</h2></div>
+            <div class="card-body">
+              <div class="stats-bars" id="statusChart"></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-header"><h2 class="card-title">Actividad reciente</h2></div>
+            <div class="card-body" id="activityLog"></div>
+          </article>
+        </div>
+      </div>
+
+      <div id="section-cargadores" class="admin-section hidden">
+        <article class="card">
+          <div class="card-header">
+            <h2 class="card-title">Tabla de cargadores</h2>
+            <span class="text-sm text-muted">Editar, eliminar o revisar estado</span>
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Potencia</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="adminChargerRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="section-reservas" class="admin-section hidden">
+        <article class="card">
+          <div class="card-header"><h2 class="card-title">Reservas recientes</h2></div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Cargador</th>
+                    <th>Estado</th>
+                    <th>Inicio</th>
+                    <th>Duracion</th>
+                    <th>Coste</th>
+                  </tr>
+                </thead>
+                <tbody id="adminReservationRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="section-estadisticas" class="admin-section hidden">
+        <article class="card">
+          <div class="card-header"><h2 class="card-title">KPI de operacion</h2></div>
+          <div class="card-body" id="statsDetail"></div>
+        </article>
+      </div>
+
+      <div id="section-logs" class="admin-section hidden">
+        <article class="card">
+          <div class="card-header"><h2 class="card-title">Logs de actividad</h2></div>
+          <div class="card-body" id="adminLogsRows"></div>
+        </article>
+      </div>
+
+      <div id="section-configuracion" class="admin-section hidden">
+        <article class="card">
+          <div class="card-header"><h2 class="card-title">Configuracion del sistema</h2></div>
+          <div class="card-body">
+            <div class="summary-panel mb-4">La configuracion avanzada esta en modo demo academico.</div>
+            <button class="btn btn-outline" id="refreshAdminData"><i class="fa-solid fa-rotate"></i> Recargar datos</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
+

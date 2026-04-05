@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine - Reservar plaza</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span class="logo-text">L<span>Line</span></span>
+  </div>
+  <ul class="navbar-nav" id="mainNav">
+    <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+    <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+    <li><a href="reservas.html" class="nav-link active"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+    <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+    <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+    <li><a href="tecnico.html" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Tecnico</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <span class="role-badge user"><i class="fa-solid fa-circle-user"></i> Usuario</span>
+    <div class="avatar" onclick="window.location='perfil.html'">DG</div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-section">
+  <div class="container">
+    <section class="page-hero">
+      <div>
+        <span class="badge badge-green badge-no-dot"><i class="fa-solid fa-bolt"></i> Reserva inteligente</span>
+        <h1>Reserva tu punto de carga en segundos</h1>
+        <p>Configura fecha, hora y duracion de forma clara. LLine mantiene tu plaza bloqueada para que llegues sin esperas.</p>
+      </div>
+      <div class="hero-mini-stats">
+        <div class="hero-mini-card">
+          <div class="hero-mini-value" id="activeReservations">0</div>
+          <div class="hero-mini-label">Reservas activas</div>
+        </div>
+        <div class="hero-mini-card">
+          <div class="hero-mini-value">15 min</div>
+          <div class="hero-mini-label">Tiempo limite de llegada</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="two-col-layout">
+      <article class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-calendar-plus"></i> Nueva reserva</h2>
+        </div>
+        <div class="card-body">
+          <div class="summary-panel" id="selectedChargerSummary"></div>
+
+          <form id="reservationForm" class="mt-6">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="reserveDate">Fecha <span>*</span></label>
+                <input class="input" type="date" id="reserveDate" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reserveTime">Hora <span>*</span></label>
+                <input class="input" type="time" id="reserveTime" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2 mt-4">
+              <div class="form-group">
+                <label class="form-label" for="reserveDuration">Duracion estimada</label>
+                <div class="select-wrapper">
+                  <select class="select" id="reserveDuration">
+                    <option value="30">30 minutos</option>
+                    <option value="60" selected>1 hora</option>
+                    <option value="90">1 hora y media</option>
+                    <option value="120">2 horas</option>
+                    <option value="180">3 horas</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vehicleSelect">Vehiculo</label>
+                <div class="select-wrapper">
+                  <select class="select" id="vehicleSelect"></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="summary-panel mt-6" id="costSummary"></div>
+            <div class="countdown-box" id="reserveCountdown">Tu reserva se mantendra durante 15:00 minutos tras confirmar.</div>
+
+            <div class="mt-6 flex gap-3">
+              <button type="button" class="btn btn-ghost" id="clearReservation">Limpiar</button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-check"></i> Confirmar reserva
+              </button>
+            </div>
+            <div id="confirmationBox" class="confirm-box hidden"></div>
+          </form>
+        </div>
+      </article>
+
+      <aside class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-lightbulb"></i> Consejos utiles</h2>
+        </div>
+        <div class="card-body">
+          <ul style="display:grid;gap:12px;color:var(--text-secondary);font-size:var(--text-sm)">
+            <li><i class="fa-solid fa-circle-check text-success"></i> Llega 5 minutos antes de la hora reservada.</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Revisa conectores compatibles antes de confirmar.</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Puedes cancelar gratis mientras la reserva este activa.</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> El precio final depende de potencia y tiempo real de carga.</li>
+          </ul>
+          <hr class="divider">
+          <a class="btn btn-outline w-full" href="historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Ver historial completo</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/reservas.js"></script>
+</body>
+</html>
+

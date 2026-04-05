@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLine - Panel tecnico</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span class="logo-text">L<span>Line</span></span>
+  </div>
+  <ul class="navbar-nav" id="mainNav">
+    <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+    <li><a href="mapa.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+    <li><a href="reservas.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+    <li><a href="historial.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+    <li><a href="perfil.html" class="nav-link"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    <li><a href="admin.html" class="nav-link"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+    <li><a href="tecnico.html" class="nav-link active"><i class="fa-solid fa-screwdriver-wrench"></i> Tecnico</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <span class="role-badge tecnico"><i class="fa-solid fa-circle-user"></i> Tecnico</span>
+    <div class="avatar" onclick="window.location='perfil.html'">DG</div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-section">
+  <div class="container">
+    <section class="section-header">
+      <div>
+        <h1 class="section-title">Panel tecnico</h1>
+        <p class="section-subtitle">Gestion de incidencias, estado tecnico y mantenimiento.</p>
+      </div>
+    </section>
+
+    <section class="grid grid-2">
+      <article class="card">
+        <div class="card-header"><h2 class="card-title">Cargadores asignados</h2></div>
+        <div class="card-body" id="techChargers"></div>
+      </article>
+
+      <article class="card incident-form">
+        <div class="card-header"><h2 class="card-title">Registrar incidencia</h2></div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="form-label" for="incidentCharger">Cargador</label>
+            <div class="select-wrapper">
+              <select id="incidentCharger" class="select"></select>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="incidentType">Tipo de incidencia</label>
+            <div class="select-wrapper">
+              <select id="incidentType" class="select">
+                <option>Fallo de comunicacion</option>
+                <option>Conector danado</option>
+                <option>Error de potencia</option>
+                <option>Intervencion preventiva</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="incidentNotes">Notas tecnicas</label>
+            <textarea id="incidentNotes" class="textarea" placeholder="Describe la incidencia y las acciones tomadas..."></textarea>
+          </div>
+          <button class="btn btn-primary" id="saveIncident"><i class="fa-solid fa-wrench"></i> Guardar incidencia</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="card mt-6">
+      <div class="card-header"><h2 class="card-title">Historial de mantenimiento</h2></div>
+      <div class="card-body" id="maintenanceHistory"></div>
+    </section>
+  </div>
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/tecnico.js"></script>
+</body>
+</html>
+

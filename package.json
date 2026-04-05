@@ -1,0 +1,22 @@
+{
+  "name": "informaticaproyecto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "db:reset": "node backend/db/reset.js",
+    "check:js": "node scripts/check-js.js",
+    "smoke:api": "node scripts/smoke-api.js",
+    "test": "npm run check:js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7"
+  }
+}
